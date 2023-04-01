@@ -27,9 +27,9 @@ namespace Management.Stock.Web
         {
             var connection = Configuration["ConexaoSqlite:SqliteConnectionString"];
 
-            services.AddDbContext<ManagementContext>(options =>
-                options.UseSqlite(connection)
-            );
+            //services.AddDbContext<ManagementContext>(options =>
+            //    options.UseSqlite(connection)
+            //);
 
             services.AddControllersWithViews();
         }
