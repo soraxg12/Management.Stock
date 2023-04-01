@@ -1,4 +1,5 @@
 ﻿using Management.Socket.Domain.Entities;
+using Management.Stock.Infra.Data.Mapping;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -20,6 +21,10 @@ namespace Management.Stock.Infra.Data.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<Product>(new ProductMap().Configure);
+            builder.Entity<Category>(new CategoryMap().Configure);
+            builder.Entity<Brand>(new BrandMap().Configure);
         }
     }
 }

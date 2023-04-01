@@ -18,15 +18,18 @@ namespace Management.Stock.Infra.Data.Migrations
 
             modelBuilder.Entity("Management.Socket.Domain.Entities.Brand", b =>
                 {
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Description");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("Description");
 
-                    b.ToTable("Brands");
+                    b.HasKey("Id");
+
+                    b.ToTable("Brand");
                 });
 
             modelBuilder.Entity("Management.Socket.Domain.Entities.Category", b =>
@@ -39,13 +42,15 @@ namespace Management.Stock.Infra.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .IsRequired()
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("Description");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("Management.Socket.Domain.Entities.Product", b =>
@@ -57,27 +62,29 @@ namespace Management.Stock.Infra.Data.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("BrandDescription")
-                        .HasColumnType("TEXT");
-
                     b.Property<int>("BrandId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("CategoryId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("CategoryId");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(150)
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("Description");
+
+                    b.Property<DateTime>("UpdateProduct")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BrandDescription");
+                    b.HasIndex("BrandId");
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Product");
                 });
 
             modelBuilder.Entity("Management.Socket.Domain.Entities.Category", b =>
@@ -91,7 +98,9 @@ namespace Management.Stock.Infra.Data.Migrations
                 {
                     b.HasOne("Management.Socket.Domain.Entities.Brand", "Brand")
                         .WithMany()
-                        .HasForeignKey("BrandDescription");
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Management.Socket.Domain.Entities.Category", "Category")
                         .WithMany()

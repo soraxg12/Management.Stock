@@ -14,6 +14,7 @@ namespace Management.Socket.Domain.Entities
         public string Description { get; set; }
         [Required]
         public int Amount { get; set; }
+        public DateTime UpdateProduct { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public int BrandId { get; set; }
