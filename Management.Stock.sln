@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Management.Stock.Web", "Man
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Management.Socket.Domain", "Management.Socket.Domain\Management.Socket.Domain.csproj", "{92422E5F-679F-438D-8890-12B8D27CABE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Management.Stock.Services", "Management.Stock.Services\Management.Stock.Services.csproj", "{68006AA8-E987-4038-983B-EC76162B179F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Management.Stock.Services", "Management.Stock.Services\Management.Stock.Services.csproj", "{68006AA8-E987-4038-983B-EC76162B179F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Management.Stock.Infra.Data", "Management.Stock.Infra.Data\Management.Stock.Infra.Data.csproj", "{3FC1BB6A-2F1B-4EB0-8B08-0A58073ABA94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Management.Stock.Infra.Data", "Management.Stock.Infra.Data\Management.Stock.Infra.Data.csproj", "{3FC1BB6A-2F1B-4EB0-8B08-0A58073ABA94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
