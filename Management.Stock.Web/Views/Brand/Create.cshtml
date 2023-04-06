@@ -1,5 +1,4 @@
-﻿@page
-@model Management.Stock.Web.Views.Brand.CreateModel
+﻿@model Management.Socket.Domain.Entities.Brand
 @{
 }
 <div class="card mt-4">
@@ -11,11 +10,12 @@
             </div>
         </div>
 
-        <form class="needs-validation" novalidate>
+        @using (Html.BeginForm("create", "brand", FormMethod.Post))
+        {
             <div class="col-md-12 row">
                 <div class="mb-3 col-md-6">
                     <label for="exampleInputPassword1" class="form-label">Description</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <input asp-for="@Model.Description" class="form-control" >
                     <div class="invalid-feedback">
                         Please provide a valid Description
                     </div>
@@ -23,6 +23,6 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
+        }
+        </div>
 </div>

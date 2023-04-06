@@ -1,7 +1,8 @@
-﻿@page
-@model Management.Stock.Web.Views.Product.CreateModel
+﻿@model Management.Socket.Domain.Entities.Product
 @{
+    ViewBag.Title = "Produto Registro";
 }
+
 <div class="card mt-4">
     <div class="card-body">
         <div class="d-flex justify-content-between">
@@ -11,11 +12,12 @@
             </div>
         </div>
 
-        <form class="needs-validation" novalidate>
+        @using (Html.BeginForm("create","product",FormMethod.Post))
+        {
             <div class="col-md-12 row">
                 <div class="mb-3 col-md-6">
                     <label for="exampleInputEmail1" class="form-label">Description</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input asp-for="@Model.Description" class="form-control">
                     <div class="invalid-feedback">
                         Please provide a valid Description
                     </div>
@@ -23,7 +25,7 @@
 
                 <div class="mb-3 col-md-6">
                     <label for="exampleInputPassword1" class="form-label">Amount</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <input asp-for="@Model.Amount" class="form-control">
                     <div class="invalid-feedback">
                         Please provide a valid Quantidade
                     </div>
@@ -33,20 +35,23 @@
             <div class="col-md-12 row">
                 <div class="mb-3 col-md-6">
                     <label for="disabledSelect" class="form-label">Disabled select menu</label>
-                    <select id="disabledSelect" class="form-select">
+                    <select asp-for="@Model.CategoryId" id="disabledSelect" class="form-select">
                         <option>Disabled select</option>
+                        <option value="1">1</option>
                     </select>
                 </div>
 
                 <div class="mb-3 col-md-6">
                     <label for="disabledSelect" class="form-label">Disabled select menu</label>
-                    <select id="disabledSelect" class="form-select">
+                    <select asp-for="@Model.BrandId" id="disabledSelect" class="form-select">
                         <option>Disabled select</option>
+                        <option value="1">1</option>
                     </select>
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <input type="submit"  class="btn btn-primary" value="Salvar">
+        }
     </div>
 </div>

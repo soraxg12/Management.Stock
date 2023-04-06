@@ -1,4 +1,8 @@
+using Management.Socket.Domain.Entities;
+using Management.Socket.Domain.Interfaces;
 using Management.Stock.Infra.Data.Context;
+using Management.Stock.Infra.Data.Repository;
+using Management.Stock.Services.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,9 +31,19 @@ namespace Management.Stock.Web
         {
             var connection = Configuration["ConexaoSqlite:SqliteConnectionString"];
 
-            //services.AddDbContext<ManagementContext>(options =>
-            //    options.UseSqlite(connection)
-            //);
+            services.AddDbContext<ManagementContext>();
+
+            //services.AddScoped<IBaseRepository<>, BaseRepository<Product>>();
+            //services.AddScoped<IBaseService<Product>, BaseService<Product>>();
+
+            services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+            services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+
+            services.AddScoped<IBrandRepository, BrandRepository>();
+            services.AddScoped<IBrandService, BrandService>();
+
+            services.AddScoped<IBaseRepository<Brand>, BaseRepository<Brand>>();
+            services.AddScoped<IBaseService<Brand>, BaseService<Brand>>();
 
             services.AddControllersWithViews();
         }

@@ -12,7 +12,8 @@
             </div>
         </div>
 
-        <form class="needs-validation" novalidate>
+        @using (Html.BeginForm("create", "category", FormMethod.Post))
+        {
             <div class="col-md-12 row">
                 <div class="mb-3 col-md-6">
                     <label for="exampleInputPassword1" class="form-label">Description</label>
@@ -24,6 +25,6 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
+        }
+        </div>
 </div>

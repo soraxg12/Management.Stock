@@ -9,7 +9,6 @@ namespace Management.Socket.Domain.Entities
 {
     public class Brand : BaseEntity
     {
-        [Key]
         public string Description { get; set; }
         List<Product> products { get; set; }
     }

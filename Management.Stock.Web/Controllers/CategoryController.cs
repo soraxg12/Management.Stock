@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Management.Socket.Domain.Entities;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,12 @@ namespace Management.Stock.Web.Controllers
 
         [HttpGet("create")]
         public IActionResult create()
+        {
+            return View();
+        }
+
+        [HttpPost("create")]
+        public IActionResult create(Category category)
         {
             return View();
         }
