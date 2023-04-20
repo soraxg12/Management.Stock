@@ -3,26 +3,30 @@ using System;
 using Management.Stock.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Management.Stock.Infra.Data.Migrations
 {
     [DbContext(typeof(ManagementContext))]
-    [Migration("20230406201058_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230407210116_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.17");
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("ProductVersion", "5.0.17")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Management.Socket.Domain.Entities.Brand", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -38,10 +42,8 @@ namespace Management.Stock.Infra.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -49,8 +51,6 @@ namespace Management.Stock.Infra.Data.Migrations
                         .HasColumnName("Description");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
 
                     b.ToTable("Category");
                 });
@@ -59,26 +59,27 @@ namespace Management.Stock.Infra.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Amount")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("BrandId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
-                        .HasColumnType("INTEGER")
+                        .HasColumnType("int")
                         .HasColumnName("CategoryId");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("varchar(100)")
+                        .HasColumnType("varchar(150)")
                         .HasColumnName("Description");
 
                     b.Property<DateTime>("UpdateProduct")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -87,13 +88,6 @@ namespace Management.Stock.Infra.Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Product");
-                });
-
-            modelBuilder.Entity("Management.Socket.Domain.Entities.Category", b =>
-                {
-                    b.HasOne("Management.Socket.Domain.Entities.Category", null)
-                        .WithMany("Categories")
-                        .HasForeignKey("CategoryId");
                 });
 
             modelBuilder.Entity("Management.Socket.Domain.Entities.Product", b =>
@@ -113,11 +107,6 @@ namespace Management.Stock.Infra.Data.Migrations
                     b.Navigation("Brand");
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("Management.Socket.Domain.Entities.Category", b =>
-                {
-                    b.Navigation("Categories");
                 });
 #pragma warning restore 612, 618
         }

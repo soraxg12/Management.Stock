@@ -7,12 +7,22 @@ namespace Management.Stock.Infra.Data.Context
 {
     public class ManagementContext : DbContext
     {
-        //public ManagementContext(DbContextOptions<ManagementContext> options) : base(options)
-        //{
-        //}
+        public ManagementContext()
+        {
+        }
 
+        public ManagementContext(DbContextOptions<ManagementContext> options) : base(options)
+        {
+            Database.EnsureCreated();
+        }
+
+        string dbc = "Server=localhost,1433;Database=management;User Id=clientecte;Password=teste123;";
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder options)
+        //  => options.UseSqlite("Data Source=ManagementStock.db");
+        
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-          => options.UseSqlite("Data Source=ManagementStock.db");
+          => options.UseSqlServer(dbc);
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }

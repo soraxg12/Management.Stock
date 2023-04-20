@@ -1,8 +1,6 @@
-﻿@page
-@model Management.Stock.Web.Views.Product.IndexModel
+﻿@model Management.Stock.Web.Models.ProductViewModel
 @{
 }
-
 
 <div class="card mt-4">
     <div class="card-body">
@@ -18,4 +16,62 @@
             </div>
         </div>
     </div>
+
+    <div class="card-body">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Quantidade</th>
+                    <th scope="col" class="col-md-3">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.products != null)
+                {
+
+                    @foreach (var product in Model.products)
+                    {
+                    <tr>
+                        <th scope="row">@product.Id</th>
+                        <td>@product.Description</td>
+                        <td>@product.Amount</td>
+                        <td>
+                            <button type="button" class="btn btn-primary">Ver</button>
+                            <button type="button" class="btn btn-warning">Editar</button>
+                            <button type="button" class="btn btn-danger" id="Del">Deletar</button>
+                        </td>
+                    </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#Del").click(() => {
+        $("#exampleModal").modal("show")
+    })
+</script>

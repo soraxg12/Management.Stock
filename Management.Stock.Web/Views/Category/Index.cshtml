@@ -1,5 +1,4 @@
-﻿@page
-@model Management.Stock.Web.Views.Category.IndexModel
+﻿@model Management.Stock.Web.Models.CategoryViewModel
 @{
 }
 
@@ -16,5 +15,35 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="card-body">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col" class="col-md-3">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.categories != null)
+                {
+
+                    @foreach (var category in Model.categories)
+                    {
+                        <tr>
+                            <th scope="row">@category.Id</th>
+                            <td>@category.Description</td>
+                            <td>
+                                <button type="button" class="btn btn-primary">Ver</button>
+                                <button type="button" class="btn btn-warning">Editar</button>
+                                <button type="button" class="btn btn-danger">Deletar</button>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
     </div>
 </div>

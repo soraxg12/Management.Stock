@@ -6,6 +6,7 @@ using Management.Stock.Services.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.DotNet.PlatformAbstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -44,6 +45,10 @@ namespace Management.Stock.Web
 
             services.AddScoped<IBaseRepository<Brand>, BaseRepository<Brand>>();
             services.AddScoped<IBaseService<Brand>, BaseService<Brand>>();
+            services.AddScoped<IBaseRepository<Product>, BaseRepository<Product>>();
+            services.AddScoped<IBaseService<Product>, BaseService<Product>>();
+            services.AddScoped<IBaseRepository<Category>, BaseRepository<Category>>();
+            services.AddScoped<IBaseService<Category>, BaseService<Category>>();
 
             services.AddControllersWithViews();
         }

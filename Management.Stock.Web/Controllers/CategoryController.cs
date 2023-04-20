@@ -1,4 +1,6 @@
 ﻿using Management.Socket.Domain.Entities;
+using Management.Socket.Domain.Interfaces;
+using Management.Stock.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,9 +12,20 @@ namespace Management.Stock.Web.Controllers
     [Route("[controller]")]
     public class CategoryController : Controller
     {
+        private IBaseService<Category> _CategoryBaseService;
+
+        public CategoryController(IBaseService<Category> categoryBaseService)
+        {
+            _CategoryBaseService = categoryBaseService;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            CategoryViewModel categoryViewModel = new CategoryViewModel();
+
+            categoryViewModel.categories = _CategoryBaseService.Get();
+
+            return View(categoryViewModel);
         }
 
         [HttpGet("create")]

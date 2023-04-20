@@ -11,8 +11,8 @@ namespace Management.Stock.Infra.Data.Migrations
                 name: "Brand",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Description = table.Column<string>(type: "varchar(100)", nullable: false)
                 },
                 constraints: table =>
@@ -24,33 +24,26 @@ namespace Management.Stock.Infra.Data.Migrations
                 name: "Category",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Description = table.Column<string>(type: "varchar(100)", nullable: false),
-                    CategoryId = table.Column<int>(type: "INTEGER", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "varchar(100)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Category", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Category_Category_CategoryId",
-                        column: x => x.CategoryId,
-                        principalTable: "Category",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Product",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Description = table.Column<string>(type: "varchar(100)", maxLength: 150, nullable: false),
-                    Amount = table.Column<int>(type: "INTEGER", nullable: false),
-                    UpdateProduct = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    CategoryId = table.Column<int>(type: "INTEGER", nullable: false),
-                    BrandId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false),
+                    Amount = table.Column<int>(type: "int", nullable: false),
+                    UpdateProduct = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    BrandId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,11 +61,6 @@ namespace Management.Stock.Infra.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Category_CategoryId",
-                table: "Category",
-                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_BrandId",

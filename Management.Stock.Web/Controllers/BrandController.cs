@@ -1,5 +1,6 @@
 ﻿using Management.Socket.Domain.Entities;
 using Management.Socket.Domain.Interfaces;
+using Management.Stock.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Management.Stock.Web.Controllers
@@ -18,7 +19,10 @@ namespace Management.Stock.Web.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            BrandViewModel brandViewModel = new BrandViewModel();
+            brandViewModel.brands = _BrandBaseService.Get();
+
+            return View(brandViewModel);
         }
 
         [HttpGet("create")]
@@ -30,9 +34,9 @@ namespace Management.Stock.Web.Controllers
         [HttpPost("create")]
         public IActionResult create(Brand brand)
         {
-            _brandService.Add(brand);
+            _BrandBaseService.Add(brand);
 
-            return View();
+            return RedirectToAction("index");
         }
     }
 }

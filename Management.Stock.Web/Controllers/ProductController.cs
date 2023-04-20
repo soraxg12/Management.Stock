@@ -1,5 +1,6 @@
 ﻿using Management.Socket.Domain.Entities;
 using Management.Socket.Domain.Interfaces;
+using Management.Stock.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,20 @@ namespace Management.Stock.Web.Controllers
     [Route("[controller]")]
     public class ProductController : Controller
     {
-        private IBaseService<Product> _productBaseService;
+        private readonly IBaseService<Product> _productBaseService;
+
+        public ProductController(IBaseService<Product> productBaseService)
+        {
+            _productBaseService = productBaseService;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            ProductViewModel productViewModel = new ProductViewModel();
+
+            productViewModel.products = _productBaseService.Get();
+
+            return View(productViewModel);
         }
 
         [HttpGet("create")]
@@ -27,8 +38,8 @@ namespace Management.Stock.Web.Controllers
         public IActionResult create(Product product)
         {
             _productBaseService.Add(product);
-           
-            return View();
+
+            return RedirectToAction("index");
         }
     }
 }
